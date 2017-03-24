@@ -10,6 +10,18 @@ function X = EulerExplicite(a,b,x0,T,p)
 endfunction
 
 
+function X = EulerImplicite(a,b,x0,T,p)
+    // (1 − hp*a(t(k,p)))X(k) = X(k−1) + hp*b(t(k,p)).
+    hp = T/p;
+    X = [x0];
+    t = linspace(0,T,p+1);
+    for k = (2:p+1),
+        X(k) = (X(k-1) + hp*b(t(k))) / (1 - hp * a(t(k)));
+    end
+    X = X';
+endfunction
+
+
 function plotSchemaEuler(a,b,x0,T,p,fun)
     t = linspace(0,T,p+1);
     x1 = x0 * 2;
@@ -27,14 +39,8 @@ function graphSchemaEulerComp(a,b,x0,T,p,f1,f2)
 endfunction
 
 
-function X = EulerImplicite(a,b,x0,T,p)
-    // (1 − hp*a(t(k,p)))X(k) = X(k−1) + hp*b(t(k,p)).
-    hp = T/p;
-    X = [x0];
+function graphCmp(a,b,x0,T,p,f1,f2,f3)
     t = linspace(0,T,p+1);
-    for k = (2:p+1),
-        X(k) = X(k-1) / (1 - hp * a(t(k)));
-    end
-    X = X';
+    plot(t,f1(a,b,x0,T,p),'ro',t,f2(a,b,x0,T,p),'g*',t,f3(a,b,x0,T,p),'b-')
+    // legend()
 endfunction
-

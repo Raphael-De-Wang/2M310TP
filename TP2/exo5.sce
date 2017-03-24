@@ -1,6 +1,6 @@
 clear;
 
-function [X,n] = netwon(x0,esp,f,df)
+function [X,n] = newton(x0,esp,f,df)
     maxIter = 100
     X = [x0]
     x = x0
@@ -27,7 +27,7 @@ function a = df1(x)
 endfunction
 
 x1 = 5
-[X1,n1] = netwon(x1,esp,f1,df1)
+[X1,n1] = newton(x1,esp,f1,df1)
 
 // ==== testcase 1 ====
 
@@ -40,4 +40,4 @@ function b = df2(x)
 endfunction
 
 x2 = 9
-[X2,n2] = netwon(x2,esp,f2,df2)
+[X2,n2] = newton(x2,esp,f2,df2)
